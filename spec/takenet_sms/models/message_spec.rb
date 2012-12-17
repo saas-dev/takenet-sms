@@ -7,8 +7,10 @@ describe TakenetSms::Models::Message do
 
   describe ".all" do
     it "returns all messages" do
-      message = klass.new
-      message.all.should == []
+      VCR.use_cassette('messages_index') do
+        message = klass.new
+        message.all.should == []
+      end
     end
   end
 end
